@@ -3,6 +3,8 @@
     <div class="nav">
       <router-link to="/">TodoList</router-link>
       |
+      <router-link to="/lifecycle">Lifecycle</router-link>
+      |
       <router-link to="/watcher">Watcher</router-link>
     </div>
     <hr/>

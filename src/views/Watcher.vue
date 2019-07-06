@@ -26,7 +26,7 @@
   import { onUnmounted, value, watch } from 'vue-function-api'
   import { getServerResponseUsingAsync, getServerResponseUsingPromise } from '@/api'
 
-  const Watcher = {
+  const WatcherComponent = {
     setup (props, context) {
       const test1 = value('begin')
       const test1NewVal = value('')
@@ -45,7 +45,11 @@
         test2.value = 'end'
       }
       const stopWatch1 = watch(
+        // data source; I think this comment is NECESSARY.
+        // also you can use '() => test1.value', as the RFC says.
         test1,
+        // this function will be called BEFORE created.
+        // and you can see the same result be printed TWICE.
         async (newVal, oldVal) => {
           test1NewVal.value = newVal
           test1OldVal.value = oldVal
@@ -62,7 +66,6 @@
         async (newVal, oldVal) => {
           test2NewVal.value = newVal
           test2OldVal.value = oldVal
-          console.log('invoke')
           getServerResponseUsingPromise()
             .then(res => {
               test2.value = res.data.test
@@ -99,5 +102,5 @@
     }
   }
 
-  export default Watcher
+  export default WatcherComponent
 </script>
