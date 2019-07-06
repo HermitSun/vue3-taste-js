@@ -1,7 +1,6 @@
 # vue3-taste-js
 
 JavaScript版本的Vue 3.0（极简）尝鲜版。
-没有什么别的依赖，甚至连router和vuex都没有。
 只是单纯为了试验新的API。
 
 具体功能是这样的，做了一个简单的todo list，可以增删，可以搜索。
