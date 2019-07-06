@@ -1,13 +1,30 @@
 <template>
   <div class="search-bar">
-    <img :src="require('@/assets/images/logo.png')"
-         alt="Vue Logo"/>
-    <input/>
+    <label for="search-content">Search content: </label>
+    <input type="text"
+           v-model="searchContent"
+           id="search-content"/>
+    <button @click="doSearch">search</button>
   </div>
 </template>
 
 <script>
-  const SearchBar = {}
+  import { value } from 'vue-function-api'
+
+  const SearchBar = {
+    setup (props, context) {
+      // data
+      const searchContent = value('')
+      // methods
+      const doSearch = () => {
+        context.emit('search', searchContent.value)
+      }
+      return {
+        searchContent,
+        doSearch
+      }
+    }
+  }
   export default SearchBar
 </script>
 

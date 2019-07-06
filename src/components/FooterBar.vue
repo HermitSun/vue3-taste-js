@@ -1,7 +1,7 @@
 <template>
   <div class="footer-bar">
     <template v-for="i in localInterval">
-      <span :key="i">{{ i }}<br/></span>
+      <span :key="i">br{{ i }}<br/></span>
     </template>
     <span>total from bus: {{ total }}</span>
     |
