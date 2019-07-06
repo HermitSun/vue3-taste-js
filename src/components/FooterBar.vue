@@ -3,7 +3,8 @@
     <template v-for="i in localInterval">
       <span :key="i">br{{ i }}<br/></span>
     </template>
-    <span>total from bus: {{ total }}</span>
+    <hr/>
+    <span>total from bus using state: {{ total }}</span>
     |
     <button @click="expandInterval">expand</button>
   </div>
