@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import './plugins/axios'
 import { plugin } from 'vue-function-api'
 import App from './App.vue'
 
