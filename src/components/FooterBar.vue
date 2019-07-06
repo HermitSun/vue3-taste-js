@@ -12,11 +12,11 @@
 
   const FooterBar = {
     props: {
-      interval: Number
+      interval: String
     },
     setup (props, context) {
       // data
-      const localInterval = value(props.interval)
+      const localInterval = value(Number(props.interval))
       // mounted
       onMounted(() => {
         console.log('after mounted: ' + props.interval)

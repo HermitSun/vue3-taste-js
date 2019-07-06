@@ -2,7 +2,7 @@
   <div class="wrapper">
     <SearchBar></SearchBar>
     <ListBody></ListBody>
-    <FooterBar :interval="1"></FooterBar>
+    <FooterBar interval="1"></FooterBar>
   </div>
 </template>
 
