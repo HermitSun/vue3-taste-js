@@ -2,7 +2,12 @@ export default [
   {
     path: '/',
     name: 'index',
-    component: () => import('@/App.vue')
+    component: () => import('@/views/TodoList.vue')
+  },
+  {
+    path: '/watcher',
+    name: 'watcher',
+    component: () => import('@/views/Watcher.vue')
   },
   {
     path: '*',

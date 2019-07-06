@@ -1,6 +1,13 @@
 <template>
   <div id="app">
-    <TodoList></TodoList>
+    <div class="nav">
+      <router-link to="/">TodoList</router-link>
+      |
+      <router-link to="/watcher">Watcher</router-link>
+    </div>
+    <hr/>
+    <!--view-->
+    <router-view></router-view>
   </div>
 </template>
 
