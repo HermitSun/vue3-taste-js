@@ -1,5 +1,9 @@
 # vue3-taste
 
+JavaScript版本的Vue 3.0尝鲜版。
+没有什么别的依赖，甚至连router和vuex都没有。
+只是单纯为了试验新的API。
+
 ## Project setup
 ```
 npm install
