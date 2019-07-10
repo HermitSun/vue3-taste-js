@@ -72,7 +72,3 @@
 
   export default LifecycleComponent
 </script>
-
-<style scoped>
-
-</style>

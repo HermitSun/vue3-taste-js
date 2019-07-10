@@ -1,32 +1,85 @@
 <template>
   <div class="list-body">
-    <p>Received search content: {{searchContent}}</p>
+    <!--add-->
+    <p>
+      <label for="add">Add: </label>
+      <input v-model="addContent"
+             id="add"/>
+      <button @click="handleAdd">Add</button>
+    </p>
+    <!--display-->
+    <p>
+      <template v-for="(item, index) in listContent">
+        <div :key="index">
+          <span>{{item}}</span>
+          <button @click="handleRemove(index)"
+                  :key="index">&times;
+          </button>
+        </div>
+      </template>
+    </p>
+    <!--search-->
+    <p>Search: {{keyword}}</p>
+    <p>
+      <template v-for="(item, index) in searchContent">
+        <div :key="index">{{item}}</div>
+      </template>
+    </p>
+    <p>total from computing: {{ total }}</p>
   </div>
 </template>
 
 <script>
-  import { onMounted, value } from 'vue-function-api'
+  import { computed, value, watch } from 'vue-function-api'
+  import { bus } from '@/utils/bus'
 
   const ListBody = {
     props: {
-      keyword: String
+      keyword: String,
+      count: Number
     },
     setup (props, context) {
       // data
-      const searchContent = value(props.keyword)
-      // hooks
-      onMounted(() => {
-        console.log('body received: ' + searchContent.value)
-      })
+      const addContent = value('')
+      const listContent = value([])
+      const searchContent = value([])
+      // computed
+      const total = computed(() => listContent.value.length)
+      const searchKeyword = computed(() => props.keyword)
+      // watch
+      watch(
+        searchKeyword,
+        (newVal, oldVal) => {
+          if (newVal) {
+            handleSearch(newVal)
+          }
+        }
+      )
+      // methods
+      const handleAdd = () => {
+        if (addContent.value) {
+          listContent.value.push(addContent.value)
+          addContent.value = ''
+          bus.total++
+        }
+      }
+      const handleRemove = (index) => {
+        listContent.value = listContent.value.filter((v, i) => i !== index)
+        bus.total--
+      }
+      const handleSearch = (val) => {
+        searchContent.value = listContent.value.filter(v => v.includes(val))
+      }
       return {
-        searchContent
+        addContent,
+        listContent,
+        searchContent,
+        total,
+        handleAdd,
+        handleRemove
       }
     }
   }
 
   export default ListBody
 </script>
-
-<style scoped>
-
-</style>

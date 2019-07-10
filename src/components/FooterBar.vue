@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import { onMounted, value } from 'vue-function-api'
+  import { computed, onMounted, value } from 'vue-function-api'
   import { bus } from '@/utils/bus'
 
   const FooterBar = {
@@ -21,7 +21,7 @@
     setup (props, context) {
       // local data, or from bus
       const localInterval = value(Number(props.interval))
-      const total = bus.total
+      const total = computed(() => bus.total)
       // mounted
       onMounted(() => {
         console.log('after mounted: interval is ' + props.interval)
@@ -40,7 +40,3 @@
   }
   export default FooterBar
 </script>
-
-<style scoped>
-
-</style>

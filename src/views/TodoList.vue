@@ -3,17 +3,16 @@
     <img :src="require('@/assets/images/logo.png')"
          alt="Vue Logo"/>
     <SearchBar @search="doSearch"></SearchBar>
-    <p ref="test">{{ asyncData }}</p>
-    <!--    <hr/>-->
-    <!--    <ListBody v-if="searchContent.value"-->
-    <!--              :keyword="searchContent.value"></ListBody>-->
-    <!--    <hr/>-->
-    <!--    <FooterBar interval="1"></FooterBar>-->
+    <hr/>
+    <ListBody :count="count"
+              :keyword="searchContent"></ListBody>
+    <hr/>
+    <FooterBar interval="1"></FooterBar>
   </div>
 </template>
 
 <script>
-  import { onMounted, value } from 'vue-function-api'
+  import { value } from 'vue-function-api'
   import SearchBar from '@/components/SearchBar'
   import ListBody from '@/components/ListBody'
   import FooterBar from '@/components/FooterBar'
@@ -23,18 +22,15 @@
     setup (props, context) {
       // data
       let searchContent = value('')
-      let asyncData = value('')
-      // hooks; TO BE EXPLICIT
-      onMounted(async () => {
-        console.log('current search is: ' + searchContent.value)
-      })
+      let count = value(0)
       // methods
       const doSearch = (search) => {
         searchContent.value = search
+        count.value++
       }
       return {
         searchContent,
-        asyncData,
+        count,
         doSearch
       }
     }
@@ -42,7 +38,3 @@
 
   export default TodoList
 </script>
-
-<style scoped>
-
-</style>

@@ -27,7 +27,3 @@
   }
   export default SearchBar
 </script>
-
-<style scoped>
-
-</style>

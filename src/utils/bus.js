@@ -6,7 +6,3 @@ Vue.use(plugin)
 export const bus = state({
   total: 0
 })
-
-export default {
-  bus
-}
