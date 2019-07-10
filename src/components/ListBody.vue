@@ -38,7 +38,7 @@
       keyword: String,
       count: Number
     },
-    setup (props, context) {
+    setup (props, { root }) {
       // data
       const addContent = value('')
       const listContent = value([])
@@ -49,7 +49,7 @@
       // watch
       watch(
         searchKeyword,
-        (newVal, oldVal) => {
+        (newVal) => {
           if (newVal) {
             handleSearch(newVal)
           }
@@ -61,11 +61,13 @@
           listContent.value.push(addContent.value)
           addContent.value = ''
           bus.total++
+          root.$store.dispatch('increaseTotal')
         }
       }
       const handleRemove = (index) => {
         listContent.value = listContent.value.filter((v, i) => i !== index)
         bus.total--
+        root.$store.dispatch('decreaseTotal')
       }
       const handleSearch = (val) => {
         searchContent.value = listContent.value.filter(v => v.includes(val))

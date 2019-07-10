@@ -26,7 +26,7 @@ const store = new Vuex.Store({
 })
 
 // a tricky patch
-export const userStore = () => {
+export const useStore = () => {
   return store
 }
 
