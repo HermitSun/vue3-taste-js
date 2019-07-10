@@ -33,6 +33,21 @@
   import { computed, value, watch } from 'vue-function-api'
   import { bus } from '@/utils/bus'
 
+  const testStrategies = {
+    foo: () => {
+      console.log('foo')
+    },
+    bar: () => {
+      console.log('bar')
+    },
+    baz: () => {
+      console.log('baz')
+    },
+    others: () => {
+      console.log('not exist')
+    }
+  }
+
   const ListBody = {
     props: {
       keyword: String,
@@ -52,22 +67,27 @@
         (newVal) => {
           if (newVal) {
             handleSearch(newVal)
+            try {
+              testStrategies[newVal]()
+            } catch (err) {
+              testStrategies['others']()
+            }
           }
         }
       )
       // methods
-      const handleAdd = () => {
+      const handleAdd = async () => {
         if (addContent.value) {
           listContent.value.push(addContent.value)
           addContent.value = ''
           bus.total++
-          root.$store.dispatch('increaseTotal')
+          await root.$store.dispatch('increaseTotal')
         }
       }
-      const handleRemove = (index) => {
+      const handleRemove = async (index) => {
         listContent.value = listContent.value.filter((v, i) => i !== index)
         bus.total--
-        root.$store.dispatch('decreaseTotal')
+        await root.$store.dispatch('decreaseTotal')
       }
       const handleSearch = (val) => {
         searchContent.value = listContent.value.filter(v => v.includes(val))
