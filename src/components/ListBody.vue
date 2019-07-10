@@ -5,7 +5,7 @@
       <label for="add">Add: </label>
       <input v-model="addContent"
              id="add"/>
-      <button @click="handleAdd">Add</button>
+      <button @click="handleAdd">add</button>
     </p>
     <!--display-->
     <p>

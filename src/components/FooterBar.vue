@@ -5,13 +5,13 @@
     </template>
     <br/>
     <div>total from bus using state: {{ total }}</div>
-    <div>total from store using store: {{ store }}</div>
+    <div>total from store using store: {{ storedTotal }}</div>
     <button @click="expandInterval">expand</button>
   </div>
 </template>
 
 <script>
-  import { computed, onMounted, value } from 'vue-function-api'
+  import { computed, value } from 'vue-function-api'
   import { useStore } from '@/store'
   import { bus } from '@/utils/bus'
 
@@ -23,20 +23,15 @@
       // local data, or from bus/store
       const localInterval = value(Number(props.interval))
       const total = computed(() => bus.total)
-      const store = computed(() => useStore().state.total)
-      // mounted
-      onMounted(() => {
-        console.log('after mounted: interval is ' + props.interval)
-      })
+      const storedTotal = computed(() => useStore().state.total)
       // methods
       const expandInterval = () => {
         localInterval.value++
-        console.log('after expanded: interval is ' + localInterval.value)
       }
       return {
         localInterval,
         total,
-        store,
+        storedTotal,
         expandInterval
       }
     }
