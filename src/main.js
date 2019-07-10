@@ -6,6 +6,10 @@ import './plugins/axios'
 import App from './App.vue'
 
 Vue.config.productionTip = false
+Vue.config.warnHandler = function (msg, vm, trace) {
+  console.log('WARN: ', msg)
+  console.log('Trace: ', trace)
+}
 Vue.use(plugin)
 
 new Vue({

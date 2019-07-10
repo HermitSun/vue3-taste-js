@@ -1,6 +1,10 @@
 <template>
   <div>
-    <p>LIFECYCLE</p>
+    <p>{{content}}</p>
+    <button @click="triggerContentChange">update</button>
+    <Parent>
+      <Child></Child>
+    </Parent>
   </div>
 </template>
 
@@ -13,11 +17,22 @@
     onUpdated,
     onActivated,
     onDeactivated,
-    onUnmounted
+    onBeforeDestroy,
+    onDestroyed,
+    onUnmounted,
+    value
   } from 'vue-function-api'
+  import Parent from '@/components/Parent'
+  import Child from '@/components/Child'
 
   const LifecycleComponent = {
+    components: { Parent, Child },
     setup (props, context) {
+      const content = value('LIFECYCLE')
+      const triggerContentChange = () => {
+        content.value += ' changed'
+      }
+      // hooks; TO BE EXPLICIT
       onCreated(() => {
         console.log('-ON CREATE-')
       })
@@ -34,16 +49,27 @@
         console.log('-ON UPDATE-')
       })
       onActivated(() => {
-        console.log('-ON ACTIVATED-')
+        console.log('-ON ACTIVATE-')
       })
       onDeactivated(() => {
-        console.log('-ON DEACTIVATED-')
+        console.log('-ON DEACTIVATE-')
+      })
+      onBeforeDestroy(() => {
+        console.log('-BEFORE DESTROY-')
+      })
+      onDestroyed(() => {
+        console.log('-ON DESTROY-')
       })
       onUnmounted(() => {
         console.log('-ON UNMOUNT-')
       })
+      return {
+        content,
+        triggerContentChange
+      }
     }
   }
+
   export default LifecycleComponent
 </script>
 

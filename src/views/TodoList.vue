@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import { onCreated, onBeforeMount, onMounted, value } from 'vue-function-api'
+  import { onMounted, value } from 'vue-function-api'
   import SearchBar from '@/components/SearchBar'
   import ListBody from '@/components/ListBody'
   import FooterBar from '@/components/FooterBar'

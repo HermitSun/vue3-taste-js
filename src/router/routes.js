@@ -7,7 +7,10 @@ export default [
   {
     path: '/lifecycle',
     name: 'lifecycle',
-    component: () => import('@/views/Lifecycle.vue')
+    component: () => import('@/views/Lifecycle.vue'),
+    meta: {
+      keepAlive: true
+    }
   },
   {
     path: '/watcher',
