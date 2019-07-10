@@ -1,10 +1,11 @@
 <template>
   <div>
     <p>{{content}}</p>
-    <button @click="triggerContentChange">update</button>
     <Parent>
       <Child></Child>
     </Parent>
+    <div>Mouse: {{x}} {{y}}</div>
+    <button @click="triggerContentChange">update</button>
   </div>
 </template>
 
@@ -22,6 +23,7 @@
     onUnmounted,
     value
   } from 'vue-function-api'
+  import { useMouse } from '@/utils/mouse'
   import Parent from '@/components/Parent'
   import Child from '@/components/Child'
 
@@ -29,6 +31,7 @@
     components: { Parent, Child },
     setup (props, context) {
       const content = value('LIFECYCLE')
+      const { x, y } = useMouse()
       const triggerContentChange = () => {
         content.value += ' changed'
       }
@@ -65,6 +68,8 @@
       })
       return {
         content,
+        x,
+        y,
         triggerContentChange
       }
     }
