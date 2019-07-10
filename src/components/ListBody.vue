@@ -61,14 +61,16 @@
       // computed
       const total = computed(() => listContent.value.length)
       const searchKeyword = computed(() => props.keyword)
+      const src = [searchKeyword]
       // watch
       watch(
-        searchKeyword,
-        (newVal) => {
+        src,
+        (newVal, oldVal) => {
           if (newVal) {
-            handleSearch(newVal)
+            console.log(newVal, oldVal)
+            handleSearch(newVal[0])
             try {
-              testStrategies[newVal]()
+              testStrategies[newVal[0]]()
             } catch (err) {
               testStrategies['others']()
             }
