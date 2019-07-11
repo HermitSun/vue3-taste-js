@@ -23,7 +23,18 @@
 </template>
 
 <script>
-  import { onUnmounted, value, watch } from 'vue-function-api'
+  import {
+    onUnmounted, value, watch,
+    onCreated,
+    onBeforeMount,
+    onMounted,
+    onBeforeUpdate,
+    onUpdated,
+    onActivated,
+    onDeactivated,
+    onBeforeDestroy,
+    onDestroyed
+  } from 'vue-function-api'
   import { getServerResponseUsingAsync, getServerResponseUsingPromise } from '@/api'
 
   const WatcherComponent = {
@@ -81,6 +92,34 @@
           flush: 'pre'
         }
       )
+      // hooks; TO BE EXPLICIT
+      onCreated(() => {
+        console.log('-ON CREATE-')
+      })
+      onBeforeMount(() => {
+        console.log('-BEFORE MOUNT-')
+      })
+      onMounted(() => {
+        console.log('-ON MOUNT-')
+      })
+      onBeforeUpdate(() => {
+        console.log('-BEFORE UPDATE-')
+      })
+      onUpdated(() => {
+        console.log('-ON UPDATE-')
+      })
+      onActivated(() => {
+        console.log('-ON ACTIVATE-')
+      })
+      onDeactivated(() => {
+        console.log('-ON DEACTIVATE-')
+      })
+      onBeforeDestroy(() => {
+        console.log('-BEFORE DESTROY-')
+      })
+      onDestroyed(() => {
+        console.log('-ON DESTROY-')
+      })
       onUnmounted(() => {
         stopWatch1()
         stopWatch2()

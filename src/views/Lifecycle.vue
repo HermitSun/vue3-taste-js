@@ -23,7 +23,7 @@
     onUnmounted,
     value
   } from 'vue-function-api'
-  import { useMouse } from '@/utils/mouse'
+  import { useMouse } from '@/components/mouse'
   import Parent from '@/components/Parent'
   import Child from '@/components/Child'
 
