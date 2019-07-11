@@ -24,16 +24,10 @@
 
 <script>
   import {
-    onUnmounted, value, watch,
     onCreated,
-    onBeforeMount,
-    onMounted,
-    onBeforeUpdate,
-    onUpdated,
-    onActivated,
-    onDeactivated,
-    onBeforeDestroy,
-    onDestroyed
+    onUnmounted,
+    value,
+    watch
   } from 'vue-function-api'
   import { getServerResponseUsingAsync, getServerResponseUsingPromise } from '@/api'
 
@@ -62,6 +56,7 @@
         // this function will be called BEFORE created.
         // and you can see the same result be printed TWICE.
         async (newVal, oldVal) => {
+          console.log('watcher1 invoked')
           test1NewVal.value = newVal
           test1OldVal.value = oldVal
           // because of the async update queue, here represents the same
@@ -75,6 +70,7 @@
       const stopWatch2 = watch(
         test2,
         async (newVal, oldVal) => {
+          console.log('watcher2 invoked')
           test2NewVal.value = newVal
           test2OldVal.value = oldVal
           getServerResponseUsingPromise()
@@ -95,30 +91,6 @@
       // hooks; TO BE EXPLICIT
       onCreated(() => {
         console.log('-ON CREATE-')
-      })
-      onBeforeMount(() => {
-        console.log('-BEFORE MOUNT-')
-      })
-      onMounted(() => {
-        console.log('-ON MOUNT-')
-      })
-      onBeforeUpdate(() => {
-        console.log('-BEFORE UPDATE-')
-      })
-      onUpdated(() => {
-        console.log('-ON UPDATE-')
-      })
-      onActivated(() => {
-        console.log('-ON ACTIVATE-')
-      })
-      onDeactivated(() => {
-        console.log('-ON DEACTIVATE-')
-      })
-      onBeforeDestroy(() => {
-        console.log('-BEFORE DESTROY-')
-      })
-      onDestroyed(() => {
-        console.log('-ON DESTROY-')
       })
       onUnmounted(() => {
         stopWatch1()
