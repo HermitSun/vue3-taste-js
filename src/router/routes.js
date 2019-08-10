@@ -18,6 +18,11 @@ export default [
     component: () => import('@/views/Watcher.vue')
   },
   {
+    path: '/this-and-refs',
+    name: 'ThisAndRefs',
+    component: () => import('@/views/ThisAndRefs.vue')
+  },
+  {
     path: '*',
     redirect: '/'
   }
